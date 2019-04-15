@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { CocktailService } from '../cocktail.service';
+
+
 @Component({
   selector: 'app-cocktail-list',
   templateUrl: './cocktail-list.component.html',
@@ -10,19 +12,17 @@ import { CocktailService } from '../cocktail.service';
 export class CocktailListComponent implements OnInit {
     
    
-   public cocktails: any
+   public cocktails = []
 
-  constructor(public _Chemin : CocktailService) { 
+  constructor(private Chemin : CocktailService) { 
 
   }
-  recup () {
-    this.cocktails = this._Chemin.getCocktails()
-    return this.cocktails
-  }
+  
   
 
   ngOnInit() {
-  this.recup()
+  this.Chemin.getCocktails().subscribe (verre => (this.cocktails = verre))
+
   }
 
 }
